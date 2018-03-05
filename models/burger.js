@@ -1,45 +1,29 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
-  $(".change-Devour").on("click", function(event) {
-    var id = $(this).data("id");
-    var newDevour = $(this).data("newDevour");
+// Import the ORM to create functions that will interact with the database.
+var orm = require("../config/orm.js");
 
-    var newSleepState = {
-      sleepy: newSleep
-    };
+var burger = {
+  all: function(cb) {
+    orm.all("burger", function(res) {
+      cb(res);
+    });
+  },
+  // The variables cols and vals are arrays.
+  create: function(cols, vals, cb) {
+    orm.create("burger", cols, vals, function(res) {
+      cb(res);
+    });
+  },
+  update: function(objColVals, condition, cb) {
+    orm.update("burger", objColVals, condition, function(res) {
+      cb(res);
+    });
+  },
+  delete: function(condition, cb) {
+    orm.delete("burger", condition, function(res) {
+      cb(res);
+    });
+  }
+};
 
-    // Send the PUT request.
-    $.ajax("/api/burger/" + id, {
-      type: "PUT",
-      data: newDevourState
-    }).then(
-      function() {
-        console.log("changed sleep to", newDevour);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $(".create-form").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    var newBurger = {
-      name: $("#ca").val().trim(),
-      sleepy: $("[burger_name=devour]:checked").val().trim()
-    };
-
-    // Send the POST request.
-    $.ajax("/api/burger", {
-      type: "POST",
-      data: newBurger
-    }).then(
-      function() {
-        console.log("created new a burger");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-});
+// Export the database functions for the controller (catsController.js).
+module.exports = burger;
