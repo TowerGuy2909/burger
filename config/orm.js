@@ -1,7 +1,8 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
-// Helper functio?? // Let's say we want to pass 3 values into the mySQL query.
+// Helper function for SQL syntax.
+// Let's say we want to pass 3 values into the mySQL query.
 // In order to write the query, we need 3 question marks.
 // The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
 // ["?", "?", "?"].toString() => "?,?,?";
@@ -41,7 +42,7 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 var orm = {
   all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM burgers";
+    var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -50,7 +51,7 @@ var orm = {
     });
   },
   create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO "
+    var queryString = "INSERT INTO " + table;
 
     queryString += " (";
     queryString += cols.toString();
@@ -71,7 +72,7 @@ var orm = {
   },
   // An example of objColVals would be {name: panther, sleepy: true}
   update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + burgers;
+    var queryString = "UPDATE " + table;
 
     queryString += " SET ";
     queryString += objToSql(objColVals);
@@ -88,7 +89,7 @@ var orm = {
     });
   },
   delete: function(table, condition, cb) {
-    var queryString = "DELETE FROM " + burgers;
+    var queryString = "DELETE FROM " + table;
     queryString += " WHERE ";
     queryString += condition;
 
@@ -102,5 +103,5 @@ var orm = {
   }
 };
 
-// Export the orm object for the model (burgers.js).
+// Export the orm object for the model (cat.js).
 module.exports = orm;
