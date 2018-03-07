@@ -1,13 +1,12 @@
-CREATE DATABASE burgers_db;
-USE burgers_db;
+### Schema
 
-CREATE TABLE burgers
+CREATE DATABASE cat_db;
+USE cat_db;
+
+CREATE TABLE cats
 (
-	id INT NOT NULL AUTO_INCREMENT,
-	burger_name VARCHAR (50) NOT NULL,
-	devoured BOOLEAN DEFAULT false,
+	id int NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	sleepy BOOLEAN DEFAULT false,
 	PRIMARY KEY (id)
 );
-
-<!-- use this to query table from workbench-->
-SELECT * FROM burgers;
