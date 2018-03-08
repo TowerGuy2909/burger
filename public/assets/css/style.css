@@ -16,4 +16,13 @@ li {
 
 .form-group {
   margin-bottom: 5px;
-}
+ text-align: center;
+  }
+
+  .form-div {
+  
+  }
+
+  .submitBtn {
+    text-align: center;
+  }
