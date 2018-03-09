@@ -1,4 +1,4 @@
-Eat da Burger!
+#Eat da Burger!
 
 What the project does?
     This project is used to demonstrate the use of handlebars template in place of an HTML page and utilizing a MySQL database to add and shift properties in the UI.
